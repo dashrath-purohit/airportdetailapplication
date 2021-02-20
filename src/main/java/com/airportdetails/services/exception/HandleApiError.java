@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import org.springframework.http.HttpStatus;
 
-public class ApiError {
+public class HandleApiError {
 
   private HttpStatus status;
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
@@ -12,16 +12,16 @@ public class ApiError {
   private String message;
   private String debugMessage;
 
-  private ApiError() {
+  private HandleApiError() {
     timestamp = LocalDateTime.now();
   }
 
-  public ApiError(HttpStatus status) {
+  public HandleApiError(HttpStatus status) {
     this();
     this.status = status;
   }
 
-  public ApiError(HttpStatus status, String message, Throwable ex) {
+  public HandleApiError(HttpStatus status, String message, Throwable ex) {
     this();
     this.status = status;
     this.message = message;

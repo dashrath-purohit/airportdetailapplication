@@ -2,7 +2,7 @@ package com.airportdetails.controller;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
-import com.airportdetails.services.exception.ApiError;
+import com.airportdetails.services.exception.HandleApiError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -17,12 +17,12 @@ public class ErrorResponseController implements ErrorController {
 
   private static  final String PAGE_NOT_FOUND = "Page Not Found";
    @GetMapping("/error")
-    public ResponseEntity<ApiError> handleError() {
+    public ResponseEntity<HandleApiError> errorHandler() {
 
      LOGGER.info("Something went wrong kindly check the api");
-     ApiError apiError = new ApiError(NOT_FOUND);
-     apiError.setMessage(PAGE_NOT_FOUND);
-     return new ResponseEntity<>(apiError, apiError.getStatus());
+     HandleApiError handleApiError = new HandleApiError(NOT_FOUND);
+     handleApiError.setMessage(PAGE_NOT_FOUND);
+     return new ResponseEntity<>(handleApiError, handleApiError.getStatus());
     }
 
     @Override

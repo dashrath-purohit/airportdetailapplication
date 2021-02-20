@@ -20,19 +20,19 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
   @Override
   protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
     String error = "Malformed JSON request";
-    return buildResponseEntity(new ApiError(HttpStatus.BAD_REQUEST, error, ex));
+    return buildResponseEntity(new HandleApiError(HttpStatus.BAD_REQUEST, error, ex));
   }
 
-  private ResponseEntity<Object> buildResponseEntity(ApiError apiError) {
-    return new ResponseEntity<>(apiError, apiError.getStatus());
+  private ResponseEntity<Object> buildResponseEntity(HandleApiError handleApiError) {
+    return new ResponseEntity<>(handleApiError, handleApiError.getStatus());
   }
 
   @ExceptionHandler(DetailsNotFoundException.class)
-  protected ResponseEntity<Object> handleEntityNotFound(
+  protected ResponseEntity<Object> handleDetailsNotFoundException(
       DetailsNotFoundException ex) {
-    ApiError apiError = new ApiError(INTERNAL_SERVER_ERROR);
-    apiError.setMessage(ex.getMessage());
-    return buildResponseEntity(apiError);
+    HandleApiError handleApiError = new HandleApiError(INTERNAL_SERVER_ERROR);
+    handleApiError.setMessage(ex.getMessage());
+    return buildResponseEntity(handleApiError);
   }
 
 }

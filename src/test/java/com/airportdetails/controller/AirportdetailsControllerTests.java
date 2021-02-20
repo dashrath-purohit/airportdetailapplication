@@ -37,7 +37,7 @@ class AirportdetailsControllerTests {
 
 			mockMvc.perform(MockMvcRequestBuilders.get("/"))
 					.andExpect(status().isOk())
-					.andExpect(content().string("SUCCESS"))
+					.andExpect(content().string("Success, welcome to airportdetails application"))
 					.andReturn();
 	}
 
@@ -80,22 +80,6 @@ class AirportdetailsControllerTests {
 		assert(containsWords(id, new String[]{"246281", "246282", "246287", "246270"}));
 
 	}
-
-	/**
-	 * Unit test to get the runway details of a country using fuzzy country name("zimbab" in place of "zimbabwe")
-	 * @throws Exception
-	 */
-	@Test
-	public void runwayDetailsFuzzySearchTest() throws Exception {
-		MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/runways/zimbab"))
-				.andExpect(status().isOk())
-				.andReturn();
-
-		String id = result.getResponse().getContentAsString();
-		assert(containsWords(id, new String[]{"246281", "246282", "246287", "246270"}));
-
-	}
-
 
 	/**
 	 * Unit test to test the exception thrown by getRunwayDeatilsMethod

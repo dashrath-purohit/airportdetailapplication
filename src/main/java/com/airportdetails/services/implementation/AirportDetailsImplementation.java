@@ -94,7 +94,7 @@ public class AirportDetailsImplementation implements AirportDetails {
           .filter(a -> {
             return beanLoader.countryBean().stream()
                 .filter(c -> c.getCountryCode().equals(countryNameCode) || c.getCountryName()
-                    .matches(countryNameCode) || FuzzySearch.ratio(countryNameCode.toLowerCase(), c.getCountryName().toLowerCase()) > 50)
+                    .matches(countryNameCode) || FuzzySearch.ratio(countryNameCode.toLowerCase(), c.getCountryName().toLowerCase()) > 60)
                 .findFirst().get().getCountryCode()
                 .equals(a.getCountryCode());
           })
